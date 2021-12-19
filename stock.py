@@ -1,7 +1,7 @@
 #!/usr/bin/python
-from pandas_reader import data
-from pandas_reader._utils import RemoteDataError
-import matplot.pyplot as plt
+from pandas_datareader import data
+from pandas_datareader._utils import RemoteDataError
+import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from datetime import datetime
@@ -17,8 +17,8 @@ def get_stats(stock_data):
     'last': np.mean(stock_data.tail(1)),
     'short_mean': np.mean(stock_data.tail(20)),
     'long_mean': np.mean(stock_data.tail(200)),
-    'short_rolling': np.mean(stock_data.rolling(window=20)).mean(),
-    'long_rolling': np.mean(stock_data.rolling(window=200)).mean()
+    #'short_rolling': np.mean(stock_data.rolling(window=20)).mean(),
+    #'long_rolling': np.mean(stock_data.rolling(window=200)).mean()
   }
   
 def clean_data(stock_data, col):
