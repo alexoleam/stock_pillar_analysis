@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Hello Alex!</h1>
+
+<h2>This is the stock pillar analysis website.</h2>
+<br/>
+<br/>
+<div>
+	<iframe width="560" height="315" src="https://www.youtube.com/embed/BhgFHQH5LNE?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<br/>
+<br/>
+
+{% if ticker %}
+	{{ticker}}
+{% endif %}
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h1>{{ api.companyName }}</h1>
+
+Stock: ${{ api.symbol }} <br/>
+Price: ${{ api.latestPrice }} <br/>
+Previous Close: ${{ api.previousClose }} <br/>
+Market Cap: {{ api.marketCap }} <br/>
+YTD Changes: {{ api.ytdChange }}% <br/>
+52Wk High:: ${{ api.week52High }} <br/>
+52Wk Low: ${{ api.week52Low }} <br/>
+
+
+{% endblock %}
