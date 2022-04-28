@@ -53,25 +53,23 @@ We believe, based on past-stock performance and experience in trading stacks tha
 
 Instructions for running the program: 
 
-Activate virtual environment: 
+Clone the repo.
 
+Install Virtual Environment in the project’s root folder: 
+$ pip install virtualenv	
+
+Create the virtual environment (in directory venv):
+python -m venv venv
+
+Activate virtual environment: 
 $ source venv/Scripts/activate
-$ django-admin.py startproject stocks
+
+Install Django in the venv:
+$ pip install Django
+
+Install “requests” in the venv:
+$ pip install requests
 
 To run the server, in the C/djangostock/stocks folder: 
 
 $ python manage.py runserver
-
-Migrated the database in a different terminal from the one the server was running on: 
-
-$ python manage.py migrate
-Created a super user:
-
-$ python manage.py createsuperuser
-
-For Windows, add winpty:
-
-$ winpty python manage.py createsuperuser
-
-To create an app:
-Python manage.py startapp quotes
