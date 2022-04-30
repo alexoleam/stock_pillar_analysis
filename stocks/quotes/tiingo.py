@@ -3,7 +3,7 @@ import requests
 headers = {
 	
 	'Content-Type': 'application/json',
-	'Authorization': 'Token 330b123f388fd51c289eccf4b815c49d137359ee'
+	'Authorization': 'Token '
 }
 
 def get_meta_data(ticker):
