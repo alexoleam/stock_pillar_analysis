@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import StockForm
 from .forms import TickerForm
 from django.http import HttpResponseRedirect
+from .tiingo import get_meta_data, get_price_data, get_statement_data, get_historical_data
 
 # Create your views here.
 
@@ -19,7 +20,11 @@ def index(request):
 
 def ticker(request, tid):
 	context = {}
-	context['ticker'] = tid 
+	context['ticker'] = tid.upper() 
+	context['meta'] = get_meta_data(tid)
+	context['price'] = get_price_data(tid)
+	context['statement'] = get_statement_data(tid)
+	context['historical'] = get_historical_data(tid)
 	return render(request, 'ticker.html', context)
 
 
@@ -29,7 +34,7 @@ def home(request):
 
 	if request.method == 'POST':
 		ticker = request.POST['ticker']
-		api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + ticker + "/quote?token=")
+		api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + ticker + "/quote?token=pk_547bbadc4d1f4d99b4d9d35d195f24b0")
 
 		try:
 			api = json.loads(api_request.content)
@@ -43,7 +48,7 @@ def home(request):
 		return render(request, 'home.html', {})
 
 
-	#pk_547bbadc4d1f4d99b4d9d35d195f24b0	
+		
 	
 
 def about(request):
@@ -66,7 +71,7 @@ def add_stock(request):
 		output = []
 
 		for ticker_item in ticker:
-			api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(ticker_item) + "/quote?token=")
+			api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(ticker_item) + "/quote?token=pk_547bbadc4d1f4d99b4d9d35d195f24b0")
 
 
 

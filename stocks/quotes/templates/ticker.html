@@ -1,12 +1,115 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Ticker</title>
-</head>
-<body>
-	<h1>{{ ticker }}</h1>
+{% extends 'base.html' %}
+{% block content %}
 
-</body>
-</html>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+
+
+	<h1>{{ meta.name }} ({{ ticker }})</h1>
+	<p>Description: {{ meta.description }}</p>
+
+
+
+	<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Volume</th>
+      <th scope="col">Market Cap</th>
+      <th scope="col">Open</th>
+      <th scope="col"> High</th>
+      <th scope="col"> Low</th>
+      <th scope="col">Close</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+
+	  	<tr>
+	  		<th scope="row">{{ price.volume }}</th>
+	  		<td>${{ price.marketCap }} </td>
+			<td>${{ price.open }} </td>
+			<td>${{ price.high }}</td>
+			<td>${{ price.low }} </td>
+			<td>${{ price.close }} </td>
+			
+		</tr>
+
+    
+  </tbody>
+</table>
+<br>
+<br>
+
+
+	
+
+	<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">data Code</th>
+      <th scope="col">{{ statement.year}}</th>
+      
+
+    </tr>
+  </thead>
+  <tbody>
+
+
+	  		{% for list_item in statement.statementData.incomeStatement %}
+
+	  	<tr>
+	  		<th scope="row">{{ list_item.dataCode }}</th>
+			<td>${{ list_item.value }} </td>
+			
+		</tr>
+			{% endfor %}
+			
+	
+
+    
+  </tbody>
+</table>
+<br>
+
+
+<br>
+	<table class="table table-striped table-bordered table-hover">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">data Code</th>
+      {% for list in historical %}
+      <th scope="col">Quarter: {{ list.quarter }},  {{ list.year}}</th>
+      {% endfor %}
+      
+
+    </tr>
+  </thead>
+  <tbody>
+
+
+	  		{% for list_item in statement.statementData.incomeStatement %}
+
+	  	<tr>
+	  		<th scope="row">{{ list_item.dataCode }}</th>
+			<td>${{ list_item.value }} </td>
+			
+		</tr>
+			{% endfor %}
+			
+	
+
+    
+  </tbody>
+</table>
+<br>
+<br>
+{% endblock %}
