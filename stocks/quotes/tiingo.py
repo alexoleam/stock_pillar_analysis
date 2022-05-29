@@ -1,5 +1,5 @@
 import requests
-
+#Add your Tiingo token here
 headers = {
 	
 	'Content-Type': 'application/json',

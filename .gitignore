@@ -178,3 +178,4 @@ cython_debug/
 .idea/vcs.xml
 .idea/workspace.xml
 .idea/inspectionProfiles/profiles_settings.xml
+stocks/stocks/settings.py
