@@ -2,17 +2,6 @@
 {% block content %}
 
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-
-
-
 	<h1>{{ meta.name }} ({{ ticker }})</h1>
 	<p>Description: {{ meta.description }}</p>
 
@@ -31,8 +20,6 @@
     </tr>
   </thead>
   <tbody>
-
-
 	  	<tr>
 	  		<th scope="row">{{ price.volume }}</th>
 	  		<td>${{ price.marketCap }} </td>
@@ -48,9 +35,6 @@
 </table>
 <br>
 <br>
-
-
-	
 
 	<table class="table table-striped table-bordered table-hover">
   <thead class="thead-dark">
@@ -72,10 +56,7 @@
 			
 		</tr>
 			{% endfor %}
-			
-	
-
-    
+ 
   </tbody>
 </table>
 <br>
@@ -88,21 +69,22 @@
       <th scope="col">data Code</th>
       {% for list in historical %}
       <th scope="col">Quarter: {{ list.quarter }},  {{ list.year}}</th>
+
       {% endfor %}
       
 
     </tr>
   </thead>
   <tbody>
+  			{% for list_item in historical %}
+  				{% for list in list_item.statementData.incomeStatement %}
 
-
-	  		{% for list_item in statement.statementData.incomeStatement %}
-
-	  	<tr>
-	  		<th scope="row">{{ list_item.dataCode }}</th>
-			<td>${{ list_item.value }} </td>
-			
-		</tr>
+				  	<tr>
+				  		<th scope="row">{{ list.dataCode }}</th>
+						<td>${{ list.value }} </td>
+						
+						</tr>
+				{% endfor %}
 			{% endfor %}
 			
 	
@@ -111,5 +93,6 @@
   </tbody>
 </table>
 <br>
+{{get_iexcloudapi_data}}
 <br>
 {% endblock %}

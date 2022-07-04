@@ -8,3 +8,6 @@ class StockForm(forms.ModelForm):
 
 class TickerForm(forms.Form):
 	ticker = forms.CharField(label='Ticker', max_length=5)
+
+class QuoteForm(forms.Form):
+	ticker = forms.CharField(label='Quote', max_length=5)

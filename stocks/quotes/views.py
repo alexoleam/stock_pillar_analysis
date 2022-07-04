@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect
 from .models import Stock
 from django.contrib import messages
 from .forms import StockForm
-from .forms import TickerForm
+from .forms import TickerForm, QuoteForm
 from django.http import HttpResponseRedirect
-from .tiingo import get_meta_data, get_price_data, get_statement_data, get_historical_data
+from .tiingo import get_meta_data, get_price_data, get_statement_data, get_historical_data, get_iexcloudapi_data
 
 # Create your views here.
 
@@ -25,6 +25,8 @@ def ticker(request, tid):
 	context['price'] = get_price_data(tid)
 	context['statement'] = get_statement_data(tid)
 	context['historical'] = get_historical_data(tid)
+	context['iexcloud'] = get_iexcloudapi_data(tid)
+
 	return render(request, 'ticker.html', context)
 
 
@@ -98,4 +100,17 @@ def delete(request, stock_id):
 	return redirect(add_stock)
 
 def eight_pillars(request):
-	return render(request, 'eight_pillars.html', {})
+	import requests
+	import json
+
+	if request.method == 'POST':
+		ticker = request.POST['ticker']
+		api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + ticker + "/income?token=")
+
+	
+
+		return render(request, 'eight_pillars.html', {'api_request' : api_request})
+
+
+	else:
+		return render(request, 'eight_pillars.html', {})	

@@ -27,6 +27,9 @@
           <a class="nav-link" href="{% url 'add_stock' %}">Watchlist</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">Index</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="{% url 'eight_pillars' %}">8 pillars</a>
         </li>
         
@@ -78,6 +81,16 @@
         <h5 class="card-title">Go to your stocks</h5>
         <p class="card-text">View all the stocks you have in your watchlist.</p>
         <a href="{% url 'add_stock' %}" class="btn btn-primary">Watchlist</a>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Index</h5>
+        <p class="card-text">Find stock ticker to analyze.</p>
+        <a href="{% url 'index' %}" class="btn btn-primary">Index</a>
       </div>
     </div>
   </div>

@@ -3,4 +3,15 @@
 
 <h1>8 pillars</h1>
 
+<br>
+<br>
+
+<form action="{% url 'eight_pillars' %}" class="d-flex" method="POST">
+          {% csrf_token %}
+        <input class="form-control me-2" type="search" placeholder="Write Stock Ticker" aria-label="Search" name="ticker">
+        <button class="btn btn-outline-success" type="submit">Add Stock</button>
+      </form>
+ <br>
+ {{ api_request }}
+ <br>
 {% endblock %}
