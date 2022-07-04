@@ -29,6 +29,6 @@ def get_historical_data(ticker):
 	return response.json()[slice(6)]
 
 def get_iexcloudapi_data(ticker):
-	url = "https://cloud.iexapis.com/stable/stock/{}/quote?token=pk_ef07cccc0b364ebaa4b28740e91d3621".format(ticker)
+	url = "https://cloud.iexapis.com/stable/stock/{}/quote?token=".format(ticker)
 	response = requests.get(url)
 	return response.json()
