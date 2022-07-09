@@ -2,9 +2,10 @@ from django.shortcuts import render, redirect
 from .models import Stock
 from django.contrib import messages
 from .forms import StockForm
-from .forms import TickerForm, QuoteForm
+from .forms import TickerForm
 from django.http import HttpResponseRedirect
-from .tiingo import get_meta_data, get_price_data, get_statement_data, get_historical_data, get_iexcloudapi_data
+from .tiingo import get_meta_data, get_price_data, get_statement_data, get_historical_data
+from django.conf import settings
 
 # Create your views here.
 
@@ -36,14 +37,18 @@ def home(request):
 
 	if request.method == 'POST':
 		ticker = request.POST['ticker']
-		api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + ticker + "/quote?token=")
+		#add your iex cloud token here
+		api_request = requests.get(settings.STOCK_API_ENDPOINT + ticker + "/quote?token=" + settings.STOCK_API_KEY)
 
 		try:
-			api = json.loads(api_request.content)
-		except Exception as e:
-			api = "Error..."
 
-		return render(request, 'home.html', {'api' : api})
+			api = json.loads(api_request.content)
+			requestExcept = ""
+		except Exception as e:
+			requestExcept = e
+			api = ""
+
+		return render(request, 'home.html', {'api': api, 'error': requestExcept})
 
 
 	else:
@@ -73,7 +78,10 @@ def add_stock(request):
 		output = []
 
 		for ticker_item in ticker:
-			api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + str(ticker_item) + "/quote?token=")
+			print("settings.STOCK_API_ENDPOINT is  "+ settings.STOCK_API_ENDPOINT)
+			print("We are getting: " + settings.STOCK_API_ENDPOINT + str(ticker_item) + "/quote?token=" + settings.STOCK_API_KEY)
+
+			api_request = requests.get(settings.STOCK_API_ENDPOINT + str(ticker_item) + "/quote?token=" + settings.STOCK_API_KEY)
 
 
 
@@ -107,10 +115,10 @@ def eight_pillars(request):
 		ticker = request.POST['ticker']
 		api_request = requests.get("https://cloud.iexapis.com/stable/stock/" + ticker + "/income?token=")
 
-	
+
 
 		return render(request, 'eight_pillars.html', {'api_request' : api_request})
 
 
 	else:
-		return render(request, 'eight_pillars.html', {})	
+		return render(request, 'eight_pillars.html', {})
