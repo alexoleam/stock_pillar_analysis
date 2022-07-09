@@ -20,16 +20,19 @@
 <br/>
 <br/>
 <br/>
+{%if  api.companyName %}}
+	<h1>{{ api.companyName }}</h1>
 
-<h1>{{ api.companyName }}</h1>
-
-Stock: ${{ api.symbol }} <br/>
-Price: ${{ api.latestPrice }} <br/>
-Previous Close: ${{ api.previousClose }} <br/>
-Market Cap: {{ api.marketCap }} <br/>
-YTD Changes: {{ api.ytdChange }}% <br/>
-52Wk High:: ${{ api.week52High }} <br/>
-52Wk Low: ${{ api.week52Low }} <br/>
+	Stock: ${{ api.symbol }} <br/>
+	Price: ${{ api.latestPrice }} <br/>
+	Previous Close: ${{ api.previousClose }} <br/>
+	Market Cap: {{ api.marketCap }} <br/>
+	YTD Changes: {{ api.ytdChange }}% <br/>
+	52Wk High:: ${{ api.week52High }} <br/>
+	52Wk Low: ${{ api.week52Low }} <br/>
+{%else %}
+	{{error}}
+{%endif %}
 
 
 {% endblock %}
